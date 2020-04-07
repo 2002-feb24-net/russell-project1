@@ -144,8 +144,6 @@ namespace Project1.Controllers
             return View();
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
         public IActionResult CancelOrder()
         {
             ShoppingCart = null;
