@@ -1,4 +1,11 @@
 # ASP.NET Core (.NET Framework)
+- task: SonarCloudPrepare@1
+  inputs:
+    SonarCloud: 'RGProject1SonarCloud'
+    organization: '2002-feb24-net'
+    scannerMode: 'MSBuild'
+    projectKey: '2002-feb24-net_russell-project1'
+    projectName: 'RussellGehan-Project1'
 # Build and test ASP.NET Core projects targeting the full .NET Framework.
 # Add steps that publish symbols, save build artifacts, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
