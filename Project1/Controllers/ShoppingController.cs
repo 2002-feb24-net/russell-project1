@@ -114,6 +114,8 @@ namespace Project1.Controllers
             return View(orderItems);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> PlaceOrder()
         {
             if (ModelState.IsValid)
@@ -142,8 +144,11 @@ namespace Project1.Controllers
             return View();
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult CancelOrder()
         {
+            ShoppingCart = null;
             return View();
         }
     }
