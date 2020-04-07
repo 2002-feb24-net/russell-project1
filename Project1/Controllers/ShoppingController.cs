@@ -114,8 +114,6 @@ namespace Project1.Controllers
             return View(orderItems);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> PlaceOrder()
         {
             if (ModelState.IsValid)
