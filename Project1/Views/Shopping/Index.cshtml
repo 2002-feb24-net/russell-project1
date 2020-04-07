@@ -1,0 +1,64 @@
+﻿@{
+    ViewData["Title"] = "Shopping Cart";
+}
+<a asp-area="" asp-controller="Shopping" asp-action="CreateOrder">Change Customer and Location</a>
+<hr />
+<p>Selected Customer: @ViewData["Customer"]</p>
+<p>Selected Location: @ViewData["Location"]</p>
+<hr />
+<h4>@ViewData["Title"]</h4>
+<a asp-area="" asp-controller="Shopping" asp-action="CreateOrderItem">Add an Item to your Shopping Cart</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in ViewData["CartItems"] as List<Dictionary<string, string>>)
+        {
+        <tr>
+            @{
+                string value;
+                if (item.TryGetValue("Pid", out value))
+                {
+                    <td>@value</td>
+                }
+                else
+                {
+                    <td>NA</td>
+                }
+                if (item.TryGetValue("Name", out value))
+                {
+                    <td>@value</td>
+                }
+                else
+                {
+                    <td>NA</td>
+                }
+                if (item.TryGetValue("Price", out value))
+                {
+                    <td>@value</td>
+                }
+                else
+                {
+                    <td>NA</td>
+                }
+                if (item.TryGetValue("Quantity", out value))
+                {
+                    <td>@value</td>
+                }
+                else
+                {
+                    <td>NA</td>
+                }
+            }
+        </tr>
+        }
+    </tbody>
+</table>
+<p>Your current total is: $@ViewData["Total"]</p>
+<a asp-area="" asp-controller="Shopping" asp-action="PlaceOrder">Place Order</a>

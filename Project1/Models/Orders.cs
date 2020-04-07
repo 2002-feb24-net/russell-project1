@@ -28,6 +28,29 @@ namespace Project1.Models
 
         public virtual Customers Customer { get; set; }
         public virtual Locations Location { get; set; }
+
+        [DisplayName("Order Items")]
         public virtual ICollection<OrderItems> OrderItems { get; set; }
+
+        public OrderItems AddToCart(OrderItems orderItem)
+        {
+            if (OrderItems.Count == 0)
+            {
+                OrderItems.Add(orderItem);
+            }
+            else
+            {
+                foreach (var item in OrderItems)
+                {
+                    if (item.ProductId == orderItem.ProductId)
+                    {
+                        item.Quantity += orderItem.Quantity;
+                        return item;
+                    }
+                }
+                OrderItems.Add(orderItem);
+            }
+            return orderItem;
+        }
     }
 }

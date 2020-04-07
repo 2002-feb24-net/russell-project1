@@ -23,6 +23,8 @@ namespace Project1.Models
         [Required]
         public string State { get; set; }
 
+        public string FullAddress { get { return Address + ", " + City + " " + State; } }
+
         public virtual ICollection<Inventory> Inventory { get; set; }
         public virtual ICollection<Orders> Orders { get; set; }
     }

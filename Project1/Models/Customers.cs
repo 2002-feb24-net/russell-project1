@@ -14,13 +14,16 @@ namespace Project1.Models
 
         public int Id { get; set; }
 
+        [DisplayName("Customer Name")]
+        public string FullName { get { return FirstName + " " + LastName; } }
+
         [Required]
         [DisplayName("First Name")]
         public string FirstName { get; set; }
 
         [Required]
         [DisplayName("Last Name")]
-        public string LastFirstName { get; set; }
+        public string LastName { get; set; }
 
         [DisplayName("Card Number")]
         [Range(0, int.MaxValue)]

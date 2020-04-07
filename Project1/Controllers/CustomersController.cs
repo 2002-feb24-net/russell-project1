@@ -25,6 +25,22 @@ namespace Project1.Controllers
             return View(await _context.Customers.ToListAsync());
         }
 
+        [HttpPost]
+        public async Task<IActionResult> SearchByName(string searchName)
+        {
+            if (searchName == null)
+            {
+                return NotFound();
+            }
+            var customers = await _context.Customers.FirstOrDefaultAsync(c => c.FirstName == searchName);
+            if (customers == null)
+            { 
+                return NotFound();
+            }
+            return View(customers);
+        }
+
+
         // GET: Customers/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -54,7 +70,7 @@ namespace Project1.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FirstName,LastFirstName,CardNumber")] Customers customers)
+        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,CardNumber")] Customers customers)
         {
             if (ModelState.IsValid)
             {

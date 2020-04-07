@@ -22,8 +22,20 @@ namespace Project1.Controllers
         // GET: Orders
         public async Task<IActionResult> Index()
         {
-            var rGProject1Context = _context.Orders.Include(o => o.Customer).Include(o => o.Location);
+            var rGProject1Context = _context.Orders.Include(o => o.Customer).Include(o => o.Location).Include(o => o.OrderItems);
             return View(await rGProject1Context.ToListAsync());
+        }
+
+        public async Task<IActionResult> SearchByCustomer(int searchId)
+        {
+            var orders = _context.Orders.Where(o => o.CustomerId == searchId).Include(o => o.Customer).Include(o => o.Location).Include(o => o.OrderItems);
+            return View(await orders.ToListAsync());
+        }
+
+        public async Task<IActionResult> SearchByLocation(int searchId)
+        {
+            var orders = _context.Orders.Where(o => o.LocationId == searchId).Include(o => o.Customer).Include(o => o.Location).Include(o => o.OrderItems);
+            return View(await orders.ToListAsync());
         }
 
         // GET: Orders/Details/5
@@ -49,8 +61,8 @@ namespace Project1.Controllers
         // GET: Orders/Create
         public IActionResult Create()
         {
-            ViewData["CustomerId"] = new SelectList(_context.Customers, "Id", "FirstName");
-            ViewData["LocationId"] = new SelectList(_context.Locations, "Id", "Address");
+            ViewData["CustomerId"] = new SelectList(_context.Customers, "Id", "FullName");
+            ViewData["LocationId"] = new SelectList(_context.Locations, "Id", "FullAddress");
             return View();
         }
 

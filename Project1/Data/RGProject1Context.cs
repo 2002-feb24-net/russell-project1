@@ -34,7 +34,7 @@ namespace Project1.Data
                     .HasMaxLength(20)
                     .IsUnicode(false);
 
-                entity.Property(e => e.LastFirstName)
+                entity.Property(e => e.LastName)
                     .IsRequired()
                     .HasMaxLength(20)
                     .IsUnicode(false);
